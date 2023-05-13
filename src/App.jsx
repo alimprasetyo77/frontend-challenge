@@ -16,15 +16,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [dataChatGroup, setDataChatMessage] = useState([])
   const [chat, setChat] = useState('')
-  // const createMessage = async () => {
-  //   const result = await fetch('https://google.com', 'POST', {
-  //     id: v4(),
-  //     group_id: 'xxx-xxx-xxx',
-  //     username: 'alim',
-  //     message: 'test',
-  //     time: new Date()
-  //   })
-  // }
+
   const getDataGroup = () => {
     setIsLoading(true)
     fetch("https://my-json-server.typicode.com/alimprasetyo77/inbox-api/group")
@@ -81,7 +73,7 @@ const App = () => {
   return (
     <div className="h-screen relative  bg-[#262626] overflow-hidden">
       <header className="bg-[#4F4F4F] p-2" >
-        <img src="../src/assets/search_24px.png" alt="search" />
+        <img src="src/assets/search_24px.png" alt="search" />
       </header>
 
       <div className="absolute bottom-5 right-10">
@@ -95,14 +87,14 @@ const App = () => {
             className={show ? "flex gap-4" : "hidden"}>
             <div className={taskIsOpen ? "flex-col text-center space-y-3 order-last" : "flex-col text-center space-y-3"}>
               <span className=" text-white font-bold ">Task</span>
-              {taskIsOpen ? <ElipseButton path={"../src/assets/chrome_reader_mode_24px_open.png"} className={"bg-[#F8B76B]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} /> : <ElipseButton path={"../src/assets/chrome_reader_mode_24px.png"} className={"bg-[#F2F2F2]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} />}
+              {taskIsOpen ? <ElipseButton path={"src/assets/chrome_reader_mode_24px_open.png"} className={"bg-[#F8B76B]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} /> : <ElipseButton path={"src/assets/chrome_reader_mode_24px.png"} className={"bg-[#F2F2F2]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} />}
             </div>
             <div className={inboxIsOpen ? "flex-col text-center space-y-3 order-last" : "flex-col text-center space-y-3"}>
               <span className=" text-white font-bold ">inbox</span>
-              {inboxIsOpen ? <ElipseButton path={"../src/assets/question_answer_24px_open.png"} className={"  bg-[#8785FF]  shadow-white "} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} /> : <ElipseButton path={"../src/assets/question_answer_24px.png"} className={" bg-[#F2F2F2]"} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} />}
+              {inboxIsOpen ? <ElipseButton path={"src/assets/question_answer_24px_open.png"} className={"  bg-[#8785FF]  shadow-white "} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} /> : <ElipseButton path={"src/assets/question_answer_24px.png"} className={" bg-[#F2F2F2]"} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} />}
             </div>
           </motion.div>
-          <ElipseButton path={"../src/assets/Shape.png"} className={inboxIsOpen || taskIsOpen ? "hidden" : "bg-[#2F80ED]"} onClick={() => setShow(!show)} />
+          <ElipseButton path={"src/assets/Shape.png"} className={inboxIsOpen || taskIsOpen ? "hidden" : "bg-[#2F80ED]"} onClick={() => setShow(!show)} />
         </div>
       </div>
 
@@ -167,7 +159,7 @@ const App = () => {
                 <div className="flex w-full h-8 border-[1px] border-[#828282] rounded-[5px] py-[5px] px-20  ">
                   <input type="text" className="w-full outline-none placeholder-[#333333]" placeholder="Search" id="search" />
                   <button>
-                    <img src="../src/assets/search_24px.svg" alt="search" />
+                    <img src="src/assets/search_24px.svg" alt="search" />
                   </button>
                 </div>
               </label>
@@ -179,7 +171,6 @@ const App = () => {
                   <p className="text-[#4F4F4F] font-semibold">Loading Chats ...</p>
                 </div>
                 :
-
                 <>
                   {dataGroup.map((data, index) => (
 
@@ -187,10 +178,10 @@ const App = () => {
                       <div className="flex gap-x-11 my-[22px]" key={index}>
                         <div className="flex justify-center ">
                           <div className="z-[1] mix-blend-normal bg-[#2F80ED] w-[34px] h-[34px] rounded-full flex items-center justify-center">
-                            <img src="../src/assets/2person_24px.png" alt="" />
+                            <img src="src/assets/2person_24px.png" alt="" />
                           </div>
                           <div className=" mix-blend-normal bg-[#E0E0E0] w-[34px] h-[34px] rounded-full flex items-center justify-center -ml-[52px]">
-                            <img src="../src/assets/1person_24px.png" alt="" />
+                            <img src="src/assets/1person_24px.png" alt="" />
                           </div>
                         </div>
                         <div className="cursor-pointer" onClick={() => chatGroupIsOpen(data.id)}>

@@ -9,6 +9,15 @@ import { v4 } from "uuid";
 import Task from "./components/Task"
 import NewTask from "./components/NewTask"
 import searchIcon from "./assets/search_24px.png"
+import searchIconSvg from "./assets/search_24px.svg"
+import taskOpenImg from "./assets/chrome_reader_mode_24px_open.png"
+import taskImg from "./assets/chrome_reader_mode_24px.png"
+import inboxOpenImg from "./assets/question_answer_24px_open.png"
+import inboxImg from "./assets/question_answer_24px.png"
+import shape from "./assets/Shape.png"
+import person2 from "./assets/2person_24px.png"
+import person1 from "./assets/1person_24px.png"
+import expandMore from "./assets/expand_more_24px.svg"
 // import NewTask from "./components/NewTask"
 
 const App = () => {
@@ -90,14 +99,14 @@ const App = () => {
             className={show ? "flex gap-4" : "hidden"}>
             <div className={taskIsOpen ? "flex-col text-center space-y-3 order-last" : "flex-col text-center space-y-3"}>
               <span className=" text-white font-bold ">Task</span>
-              {taskIsOpen ? <ElipseButton path={"src/assets/chrome_reader_mode_24px_open.png"} className={"bg-[#F8B76B]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} /> : <ElipseButton path={"src/assets/chrome_reader_mode_24px.png"} className={"bg-[#F2F2F2]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} />}
+              {taskIsOpen ? <ElipseButton path={taskOpenImg} className={"bg-[#F8B76B]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} /> : <ElipseButton path={taskImg} className={"bg-[#F2F2F2]"} onClick={() => isOpened("taskOpen", !taskIsOpen)} />}
             </div>
             <div className={inboxIsOpen ? "flex-col text-center space-y-3 order-last" : "flex-col text-center space-y-3"}>
               <span className=" text-white font-bold ">inbox</span>
-              {inboxIsOpen ? <ElipseButton path={"src/assets/question_answer_24px_open.png"} className={"  bg-[#8785FF]  shadow-white "} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} /> : <ElipseButton path={"src/assets/question_answer_24px.png"} className={" bg-[#F2F2F2]"} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} />}
+              {inboxIsOpen ? <ElipseButton path={inboxOpenImg} className={"  bg-[#8785FF]  shadow-white "} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} /> : <ElipseButton path={inboxImg} className={" bg-[#F2F2F2]"} onClick={() => isOpened("inboxOpen", !inboxIsOpen)} />}
             </div>
           </motion.div>
-          <ElipseButton path={"src/assets/Shape.png"} className={inboxIsOpen || taskIsOpen ? "hidden" : "bg-[#2F80ED]"} onClick={() => setShow(!show)} />
+          <ElipseButton path={shape} className={inboxIsOpen || taskIsOpen ? "hidden" : "bg-[#2F80ED]"} onClick={() => setShow(!show)} />
         </div>
       </div>
 
@@ -162,7 +171,7 @@ const App = () => {
                 <div className="flex w-full h-8 border-[1px] border-[#828282] rounded-[5px] py-[5px] px-20  ">
                   <input type="text" className="w-full border-none placeholder-[#333333]" placeholder="Search" id="search" />
                   <button>
-                    <img src="src/assets/search_24px.svg" alt="search" />
+                    <img src={searchIconSvg} alt="search" />
                   </button>
                 </div>
               </label>
@@ -181,10 +190,10 @@ const App = () => {
                       <div className="flex gap-x-11 my-[22px]" key={index}>
                         <div className="flex justify-center ">
                           <div className="z-[1] mix-blend-normal bg-[#2F80ED] w-[34px] h-[34px] rounded-full flex items-center justify-center">
-                            <img src="src/assets/2person_24px.png" alt="" />
+                            <img src={person2} alt="" />
                           </div>
                           <div className=" mix-blend-normal bg-[#E0E0E0] w-[34px] h-[34px] rounded-full flex items-center justify-center -ml-[52px]">
-                            <img src="src/assets/1person_24px.png" alt="" />
+                            <img src={person1} alt="" />
                           </div>
                         </div>
                         <div className="cursor-pointer" onClick={() => chatGroupIsOpen(data.id)}>
@@ -216,7 +225,7 @@ const App = () => {
               <div className="w-full px-24">
                 <button onClick={() => setOpenMyTask(!openMyTask)} className="flex items-center gap-x-[7px] border w-[118px] border-[#828282] rounded-[5px] py-[10px] px-[14px] text-[#4F4F4F] font-semibold">
                   My Tasks
-                  <img src="src/assets/expand_more_24px.svg" alt="" className={openMyTask && "rotate-180"} />
+                  <img src={expandMore} alt="" className={openMyTask && "rotate-180"} />
                 </button>
                 {openMyTask &&
                   <div className="absolute left-1 top-16 border border-[#828282] rounded-[5px] w-[288px] h-[80px] bg-[#FFFFFF] text-[#4F4F4F] font-semibold">

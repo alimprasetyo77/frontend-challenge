@@ -6,6 +6,10 @@ import ChatBox from "./components/ChatBox"
 import InformationChat from "./components/InformationChat"
 // eslint-disable-next-line no-unused-vars
 import { v4 } from "uuid";
+import Task from "./components/Task"
+import NewTask from "./components/NewTask"
+import searchIcon from "./assets/search_24px.png"
+// import NewTask from "./components/NewTask"
 
 const App = () => {
   const [show, setShow] = useState(false)
@@ -15,7 +19,8 @@ const App = () => {
   const [dataGroup, setDataGroup] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [dataChatGroup, setDataChatMessage] = useState([])
-  const [chat, setChat] = useState('')
+  const [openMyTask, setOpenMyTask] = useState(false)
+  // const [chat, setChat] = useState('')
 
   const getDataGroup = () => {
     setIsLoading(true)
@@ -35,30 +40,28 @@ const App = () => {
         setIsLoading(false)
       })
   }
-  const sendChat = (e) => {
-    e.preventDefault()
-    fetch("https://my-json-server.typicode.com/alimprasetyo77/inbox-api/chat", {
-      method: "POST",
-      body: JSON.stringify({
-        id: 2,
-        group_id: 2,
-        username: "user_2",
-        message: chat,
-        time: new Date().toLocaleDateString()
-      })
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-  }
+  // const sendChat = (e) => {
+  //   e.preventDefault()
+  //   fetch("https://my-json-server.typicode.com/alimprasetyo77/inbox-api/chat", {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       id: 2,
+  //       group_id: 2,
+  //       username: "user_2",
+  //       message: chat,
+  //       time: new Date().toLocaleDateString()
+  //     })
+  //   })
+  //     .then((response) => response.json())
+  //     .then((json) => console.log(json));
+  // }
   useEffect(() => {
     getDataGroup()
   }, [inboxIsOpen])
 
   function chatGroupIsOpen(id) {
     setMessageIsOpen(true)
-    if (id) {
-      getDataGroupById(id)
-    }
+    getDataGroupById(id)
   }
 
   function isOpened(status, value) {
@@ -73,7 +76,7 @@ const App = () => {
   return (
     <div className="h-screen relative  bg-[#262626] overflow-hidden">
       <header className="bg-[#4F4F4F] p-2" >
-        <img src="src/assets/search_24px.png" alt="search" />
+        <img src={searchIcon} alt="search" />
       </header>
 
       <div className="absolute bottom-5 right-10">
@@ -105,7 +108,7 @@ const App = () => {
             opacity: inboxIsOpen ? 1 : 0, y: inboxIsOpen ? 0 : 50
           }}
           transition={{ duration: 0.2 }}
-          className={messageIsOpen ? "absolute right-4 bottom-36 w-[734px] h-[600px] sm:w-[734px] sm:h-[470px] bg-[#FFFFFF] rounded-sm scrollbar scrollbar-thumb-[#BDBDBD] scrollbar-track-gray-100 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-h-4 scrollbar-w-2" : "absolute right-4 bottom-36 w-[734px] h-[600px] sm:w-[734px] sm:h-[470px] bg-[#FFFFFF] rounded-sm py-[24px] px-[32px] overflow-y-scroll  scrollbar-thumb-[#BDBDBD] scrollbar scrollbar-w-2 scrollbar-h-72 scrollbar-track-gray-100 scrollbar-track-rounded-xl"}>
+          className={messageIsOpen ? "absolute right-4 bottom-36 w-[734px] h-[470px] 2xl:w-[734px] 2xl:h-[600px] bg-[#FFFFFF] rounded-sm scrollbar scrollbar-thumb-[#BDBDBD] scrollbar-track-gray-100 overflow-y-scroll scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-h-4 scrollbar-w-2" : "absolute right-4 bottom-36 w-[734px] h-[470px] 2xl:w-[734px] 2xl:h-[600px] bg-[#FFFFFF] rounded-sm py-[24px] px-[32px] overflow-y-scroll  scrollbar-thumb-[#BDBDBD] scrollbar scrollbar-w-2 scrollbar-h-72 scrollbar-track-gray-100 scrollbar-track-rounded-xl"}>
 
           {messageIsOpen ?
             <>
@@ -145,9 +148,9 @@ const App = () => {
                 }
               </div>
               <div className="w-full sticky bottom-0 bg-white p-4 border-t-2 px-[32px] pb-[24px]">
-                <form onSubmit={sendChat}>
+                <form >
                   <div className="flex justify-between gap-x-4">
-                    <input placeholder="Type a new message" type="text" className="flex-grow py-[10px] px-[16px] outline-none border border-[#828282] rounded-[5px] placeholder-[#333333] text-[#333333]" onChange={(e) => setChat(e.target.value)} />
+                    <input placeholder="Type a new message" type="text" className="flex-grow py-[10px] px-[16px] outline-none border border-[#828282] rounded-[5px] placeholder-[#333333] text-[#333333]" />
                     <button type="submit" className="bg-[#2F80ED] text-white py-[8px] px-[16px] rounded-[5px]">Send</button>
                   </div>
                 </form>
@@ -157,7 +160,7 @@ const App = () => {
             <>
               <label htmlFor="search">
                 <div className="flex w-full h-8 border-[1px] border-[#828282] rounded-[5px] py-[5px] px-20  ">
-                  <input type="text" className="w-full outline-none placeholder-[#333333]" placeholder="Search" id="search" />
+                  <input type="text" className="w-full border-none placeholder-[#333333]" placeholder="Search" id="search" />
                   <button>
                     <img src="src/assets/search_24px.svg" alt="search" />
                   </button>
@@ -205,6 +208,33 @@ const App = () => {
           }
 
         </motion.div>
+      }
+      {taskIsOpen &&
+        <div className={messageIsOpen ? "absolute right-4 bottom-36 w-[734px] h-[470px] 2xl:w-[734px] 2xl:h-[600px] bg-[#FFFFFF] rounded-sm " : "absolute right-4 bottom-36 w-[734px] h-[470px] 2xl:w-[734px] 2xl:h-[600px] bg-[#FFFFFF] rounded-sm pt-[18px] pb-[42px] pl-[29px] pr-[13px]"}>
+          <div className="container h-full overflow-y-scroll scrollbar-thumb-[#BDBDBD] scrollbar scrollbar-w-2 scrollbar-h-72 scrollbar-track-gray-100 scrollbar-track-rounded-xl">
+            <div className="flex justify-between sticky top-0 z-10 bg-white border-b pb-4">
+              <div className="w-full px-24">
+                <button onClick={() => setOpenMyTask(!openMyTask)} className="flex items-center gap-x-[7px] border w-[118px] border-[#828282] rounded-[5px] py-[10px] px-[14px] text-[#4F4F4F] font-semibold">
+                  My Tasks
+                  <img src="src/assets/expand_more_24px.svg" alt="" className={openMyTask && "rotate-180"} />
+                </button>
+                {openMyTask &&
+                  <div className="absolute left-1 top-16 border border-[#828282] rounded-[5px] w-[288px] h-[80px] bg-[#FFFFFF] text-[#4F4F4F] font-semibold">
+                    <button className="w-full text-start  border-b border-[#828282] py-2 px-4 ">Personal Errands</button>
+                    <button className="w-full  text-start border-[#828282] py-2 px-4">Urgent To-Do</button>
+                  </div>
+                }
+              </div>
+              <div className="w-full flex items-center justify-end">
+                <button className="py-[8px] px-[16px] bg-[#2F80ED] rounded-[5px] text-white">New Task</button>
+              </div>
+            </div>
+            <Task />
+            <Task />
+            <Task />
+            <NewTask />
+          </div>
+        </div>
       }
     </div >
   )

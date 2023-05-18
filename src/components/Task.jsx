@@ -30,7 +30,7 @@ const Task = () => {
             </div>
             <div className={isOpen ? "hidden" : "flex items-center gap-4 ml-8"}>
                 <img src={scheduleImg} alt="schedule_24px" />
-                <input type="date" className="border py-1 px-6 outline-none rounded-sm border-[#828282] text-[#828282]" />
+                <input type="date" className="border py-1 px-6 outline-none rounded-sm focus:border-[#828282] text-[#828282] focus:ring-0" />
             </div>
             <div className={isOpen ? "hidden" : "flex items-start gap-4 ml-8"}>
                 <img src={editImg} alt="edit_24px" />

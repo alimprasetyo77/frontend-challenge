@@ -169,7 +169,7 @@ const App = () => {
             <>
               <label htmlFor="search">
                 <div className="flex w-full h-8 border-[1px] border-[#828282] rounded-[5px] py-[5px] px-20  ">
-                  <input type="text" className="w-full border-none placeholder-[#333333]" placeholder="Search" id="search" />
+                  <input type="text" className="w-full border-none focus:ring-0  placeholder-[#333333]" placeholder="Search" id="search" />
                   <button>
                     <img src={searchIconSvg} alt="search" />
                   </button>
